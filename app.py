@@ -19,7 +19,7 @@ st.write("Enter transaction details and click Predict")
 # ✅ ONLY 4 INPUTS (clean UI)
 
 # Amount
-amount = st.number_input("Amount", value=100.0)
+amount = st.number_input("Amount", value=0.0)
 
 # Merchant ID
 merchant_id = st.number_input("Merchant ID", value=1)
@@ -56,7 +56,7 @@ if st.button("Predict"):
     prediction = pipeline.predict(input_df)[0]
     probability = pipeline.predict_proba(input_df)[0][1]
 
-    if prediction == 1:
+    if prediction >=0.11:
         st.error(f"🚨 Fraud Detected!\nProbability: {probability:.2f}")
     else:
         st.success(f"✅ Legit Transaction\nProbability: {probability:.2f}")
