@@ -4,7 +4,7 @@ import numpy as np
 import joblib
 
 # Load saved system
-data = joblib.load("fraud_full_system.joblib")
+data = joblib.load("./fraud_full_system.joblib")
 
 pipeline = data["pipeline"]
 features = data["features"]
