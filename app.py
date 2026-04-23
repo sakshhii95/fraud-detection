@@ -5,14 +5,13 @@ import joblib
 
 # Load saved system
 data = joblib.load("fraud_full_system.joblib")
-
-pipeline = data["pipeline"]
+model = data["model"]
 features = data["features"]
 encoders = data["encoders"]   
 
 # Page setup
 st.set_page_config(page_title="Fraud Detection", layout="centered")
-
+git push -u origin main --force
 st.title("💳 Credit Card Fraud Detection")
 st.write("Enter transaction details and click Predict")
 
@@ -53,10 +52,10 @@ input_df = pd.DataFrame([input_data])
 
 # Predict button
 if st.button("Predict"):
-    prediction = pipeline.predict(input_df)[0]
-    probability = pipeline.predict_proba(input_df)[0][1]
+    probability = model.predict_proba(input_df)[0][1]
+    threshold=0.1
 
-    if prediction >=0.1:
+    if probability >=0.1:
         st.error(f"🚨 Fraud Detected!\nProbability: {probability:.2f}")
     else:
         st.success(f"✅ Legit Transaction\nProbability: {probability:.2f}")
